@@ -10,3 +10,4 @@ Place `multiloop.lua` in your scripts folder, generally `~/.config/mpv/scripts/`
 Follow the on-screen instructions.
 If you decide to save the A-B points for future use, a file with the same name as the file you are playing and "mab" extension will be created.
 
+Once looping, to exit you'll have to quit mpv.
