@@ -4,7 +4,7 @@ Loop over multiple A-B points in mpv.
 ![screenshot](/img/screenshot.png)
 
 ## Installation
-Place `multiloop.lua` in your scripts folder, generally `~/.config/mpv/scripts/` (Linux) or `%AppData%\mpv\scripts\` (Windows), or start mpv with `--scripts /path/to/multiloop.lua`.
+Place `multiloop.lua` in your scripts folder, generally `~/.config/mpv/scripts/` (GNU/Linux) or `%AppData%\mpv\scripts\` (Windows), or start mpv with `--scripts /path/to/multiloop.lua`.
 
 ## Usage
 The script is activated by the M (shift+m) key. This can be changed by editing the `keybind` variable at the beginning of the file.
