@@ -12,4 +12,4 @@ The script is activated by the M (shift+m) key. This can be changed by editing t
 Follow the on-screen instructions.
 If you decide to save the A-B points for future use, a file with the same name as the file you are playing and "mab" extension will be created. The points will be restored from this file when activating the script.
 
-Once looping, to exit you'll have to quit mpv.
+~~Once looping, to exit you'll have to quit mpv.~~
