@@ -301,9 +301,9 @@ function main()
     mp.add_forced_key_binding("l", "l", loop)    
     mp.add_forced_key_binding("ESC", "ESC", clearMenu)    
     
-    local fn = mp.get_property("filename/no-ext")
-    if file_exists(fn .. ".mab") == true then
-        positions = persistence.load(fn .. ".mab")
+    local fn = mp.get_property("path"):match("(.+)%..+$") .. ".mab"
+    if file_exists(fn) == true then
+        positions = persistence.load(fn)
     end
     
     drawMenu()
