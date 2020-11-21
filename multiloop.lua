@@ -204,7 +204,7 @@ function drawMenu()
     ass:append("{\\b1}2{\\b0} set end time\\N")
     ass:append("{\\b1}d{\\b0} duplicate last a-b point\\N")
     ass:append("{\\b1}s{\\b0} save positions to file\\N")
-    ass:append("{\\b1}l{\\b0} loop\\N")
+    ass:append("{\\b1}l{\\b0} loop / end loop\\N")
     ass:append("{\\b1}ESC{\\b0} hide\\N")
     mp.set_osd_ass(window_w, window_h, ass.text)
 end
@@ -257,40 +257,35 @@ function savePositions()
     end
 end
 
-function loopab(abpoint)
-    mp.set_property_native("time-pos", abpoint[1])
-    local tp = mp.get_property_number("time-pos")
-    while tp < abpoint[2] do
-        tp = mp.get_property_number("time-pos")
+p_count = 1
+
+function on_timepos_change()
+    if mp.get_property_number("time-pos") >= positions[p_count][2] then
+        if p_count ~= #positions then
+            p_count = p_count + 1
+        else
+            p_count = 1
+        end
+        mp.set_property_native("time-pos", positions[p_count][1])
     end
 end
 
 function loop()
-    clearMenu()
-    local count = 1
-    looping = true
-    if #positions ~= 0 then
-        while looping == true do
-            loopab(positions[count])
-            if count == #positions then
-                count = 1
-            else
-                count = count + 1
-            end
+    if looping == false then
+        looping = true
+        clearMenu()
+        if #positions ~= 0 then
+            mp.set_property_native("time-pos", positions[p_count][1])
+            mp.observe_property("time-pos", "string", on_timepos_change)
+        else
+            message("you have to set some points first!")
+            drawMenu()
         end
     else
-        message("you have to set some points first!")
-        drawMenu()
-    end
-end
-
--- doesn't work as expected because apparently 
--- lua doesn't have keyboard interrupts
-function endLoop()
-    if looping == true then 
         looping = false
+        mp.unobserve_property(on_timepos_change)
+        drawMenu()        
     end
-    clearMenu()
 end
 
 function main()
